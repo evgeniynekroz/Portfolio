@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ru" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NekrozDev | Portfolio</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --accent-color: #ff2d2d;
+            --accent-glow: rgba(255, 45, 45, 0.5);
+            --bg-dark: #0a0a0f;
+            --card-bg-dark: rgba(20, 20, 25, 0.8);
+            --transition-speed: 0.3s;
+        }
+
+        [data-bs-theme="light"] {
+            --accent-color: #d90429;
+            --accent-glow: rgba(217, 4, 41, 0.2);
+            --bg-dark: #f8f9fa;
+            --card-bg-dark: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--bs-body-color);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            overflow-x: hidden;
+        }
+
+        /* Навигация */
+        .navbar {
+            backdrop-filter: blur(10px);
+            background-color: rgba(10, 10, 15, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        [data-bs-theme="light"] .navbar {
+            background-color: rgba(248, 249, 250, 0.8);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-link {
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: var(--accent-color) !important;
+        }
+
+        /* Hero секция */
+        .hero-section {
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .avatar-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .avatar-img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--accent-color);
+            box-shadow: 0 0 30px var(--accent-glow);
+            transition: transform 0.5s ease;
+        }
+        .avatar-img:hover {
+            transform: scale(1.05);
+        }
+
+        .display-1 {
+            font-weight: 800;
+            letter-spacing: -2px;
+            background: linear-gradient(45deg, #fff, var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        [data-bs-theme="light"] .display-1 {
+            background: linear-gradient(45deg, #212529, var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Карточки и блоки */
+        .section-title {
+            font-weight: 800;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .skill-card {
+            background: var(--card-bg-dark);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            height: 100%;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        [data-bs-theme="light"] .skill-card {
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Анимации появления */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Кнопки */
+        .btn-accent {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-accent:hover {
+            background-color: #ff4d4d;
+            box-shadow: 0 0 20px var(--accent-glow);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Контакты */
+        .contact-link {
+            font-size: 1.25rem;
+            color: var(--bs-body-color);
+            text-decoration: none;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        .contact-link:hover {
+            color: var(--accent-color);
+        }
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        /* Переключатель темы */
+        .theme-toggle {
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <span style="color: var(--accent-color)">N</span>K
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link mx-2" href="#about">Обо мне</a></li>
+                    <li class="nav-item"><a class="nav-link mx-2" href="#skills">Навыки</a></li>
+                    <li class="nav-item"><a class="nav-link mx-2" href="#contacts">Контакты</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <div class="theme-toggle" id="themeSwitcher" title="Переключить тему">
+                            <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Секция -->
+    <header class="hero-section container">
+        <div class="avatar-container reveal">
+            <!-- Проверка наличия аватарки: avatar.jpg -> avatar.png -> placeholder -->
+            <img src="avatar.jpg" onerror="this.src='avatar.png'; this.onerror=function(){this.src='https://via.placeholder.com/200?text=NK';};" alt="Nekroz Dev" class="avatar-img">
+        </div>
+        <h1 class="display-1 reveal">Nekroz Dev</h1>
+        <p class="lead mb-4 reveal" style="max-width: 700px; margin: 0 auto; color: var(--text-secondary)">
+            Создаю сайты, ботов, моды и приложения — от идеи до результата.
+        </p>
+        <div class="reveal">
+            <a href="#contacts" class="btn btn-accent shadow-lg">Связаться со мной</a>
+        </div>
+    </header>
+
+    <!-- Обо мне -->
+    <section id="about" class="container py-5 mt-5">
+        <div class="row align-items-center">
+            <div class="col-lg-10 mx-auto reveal">
+                <h2 class="section-title">Обо мне</h2>
+                <p class="fs-5 lh-lg">
+                    Привет! Я универсальный разработчик с опытом в веб-технологиях, создании Telegram-ботов, моддинге для <strong>Geode</strong> и кроссплатформенной мобильной разработке на <strong>Flutter</strong>. 
+                    Мне нравится превращать сложные задачи в простые и красивые digital-решения. Работаю быстро, пишу чистый код и всегда довожу проекты до конца.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Навыки -->
+    <section id="skills" class="container py-5 mt-5">
+        <h2 class="section-title reveal">Навыки</h2>
+        <div class="row g-4">
+            <!-- Web -->
+            <div class="col-md-6 col-lg-3 reveal">
+                <div class="skill-card">
+                    <i class="bi bi-code-slash skill-icon"></i>
+                    <h4>Web-разработка</h4>
+                    <p class="text-secondary small">HTML5, CSS3, JavaScript, Bootstrap. Создание адаптивных и быстрых сайтов.</p>
+                </div>
+            </div>
+            <!-- Bots -->
+            <div class="col-md-6 col-lg-3 reveal">
+                <div class="skill-card">
+                    <i class="bi bi-robot skill-icon"></i>
+                    <h4>Telegram-боты</h4>
+                    <p class="text-secondary small">Python/Node.js. Автоматизация процессов, работа с API и сложной логикой.</p>
+                </div>
+            </div>
+            <!-- Modding -->
+            <div class="col-md-6 col-lg-3 reveal">
+                <div class="skill-card">
+                    <i class="bi bi-controller skill-icon"></i>
+                    <h4>Моддинг</h4>
+                    <p class="text-secondary small">Geode (Geometry Dash). Разработка расширений и модификаций игрового процесса.</p>
+                </div>
+            </div>
+            <!-- Mobile -->
+            <div class="col-md-6 col-lg-3 reveal">
+                <div class="skill-card">
+                    <i class="bi bi-phone skill-icon"></i>
+                    <h4>Мобильная разработка</h4>
+                    <p class="text-secondary small">Flutter. Кроссплатформенные приложения для iOS и Android с единой базой кода.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contacts" class="container py-5 mt-5 mb-5">
+        <div class="row">
+            <div class="col-lg-6 reveal">
+                <h2 class="section-title">Контакты</h2>
+                <p class="mb-4">Готов к новым интересным проектам. Пишите, обсудим вашу идею!</p>
+                
+                <a href="mailto:evgen20111110@gmail.com" class="contact-link">
+                    <i class="bi bi-envelope-fill contact-icon"></i>
+                    evgen20111110@gmail.com
+                </a>
+                
+                <a href="https://t.me/nekrozdev" target="_blank" class="contact-link">
+                    <i class="bi bi-telegram contact-icon"></i>
+                    @nekrozdev
+                </a>
+            </div>
+            <div class="col-lg-6 reveal mt-4 mt-lg-0">
+                <div class="skill-card d-flex flex-column justify-content-center align-items-center text-center p-5">
+                    <h3 class="mb-3">Давайте работать вместе!</h3>
+                    <p class="text-secondary">Ваш проект заслуживает качественной реализации.</p>
+                    <div class="mt-3">
+                        <a href="https://t.me/nekrozdev" class="btn btn-accent">Написать в Telegram</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center text-secondary">
+        <div class="container">
+            <p>&copy; 2026 NekrozDev. Все права защищены.</p>
+            <div class="fs-4">
+                <a href="https://t.me/nekrozdev" class="text-secondary me-3"><i class="bi bi-telegram"></i></a>
+                <a href="mailto:evgen20111110@gmail.com" class="text-secondary"><i class="bi bi-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // --- Переключение темы ---
+        const themeSwitcher = document.getElementById('themeSwitcher');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlElement = document.documentElement;
+
+        // Загрузка сохраненной темы
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        htmlElement.setAttribute('data-bs-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+
+        themeSwitcher.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            htmlElement.setAttribute('data-bs-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        function updateThemeIcon(theme) {
+            if (theme === 'dark') {
+                themeIcon.classList.replace('bi-sun-fill', 'bi-moon-stars-fill');
+            } else {
+                themeIcon.classList.replace('bi-moon-stars-fill', 'bi-sun-fill');
+            }
+        }
+
+        // --- Intersection Observer (Анимация при скролле) ---
+        const observerOptions = {
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // --- Плавный скролл для навигации ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
